@@ -1,27 +1,63 @@
-September 19, 2026 · Baguio City
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>J & F — Wedding Reservation</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="page">
+    <section class="card">
+      <header class="header">
+        <p class="date">September 19, 2026 · Baguio City</p>
+        <h1 class="title">J &amp; F</h1>
+        <p class="subtitle">Wedding Reservation</p>
+        <p class="names">Jose Ernesto &amp; Fynee</p>
+      </header>
 
-J & F
-Wedding Reservation
-Jose Ernesto & Fynee
+      <div class="heart" aria-hidden="true">♥</div>
 
-♥
-As we celebrate this special day with an intimate gathering of our closest family and friends, we kindly ask that you limit the number of additional guests you bring. Our venue has limited capacity, and we want everyone to feel comfortable and enjoy the celebration. Please indicate the total number of guests who will be attending with you when you RSVP. Thank you for your understanding and for helping us keep our wedding warm, meaningful, and intimate.
+      <p class="note">
+        As we celebrate this special day with an intimate gathering of our closest family and friends, we kindly ask that you limit the number of additional guests you bring. Our venue has limited capacity, and we want everyone to feel comfortable and enjoy the celebration. Please indicate the total number of guests who will be attending with you when you RSVP. Thank you for your understanding and for helping us keep our wedding warm, meaningful, and intimate.
+      </p>
 
-Kindly respond by August 22, 2026
+      <p class="rsvp-by">Kindly respond by <strong>August 22, 2026</strong></p>
 
-Will you be joining us?
-Full name * 
-Enter your full name
-Contact number * 
-e.g. 0912 345 6789
-Total number of attendees * 
-1
- Please include yourself in the total.
-Confirmation of attendance *
- Joyfully acceptsWe will celebrate with you  Regretfully declinesWe will be there in spirit
-Send My RSVP →
-Your details will only be used for our wedding arrangements.
+      <form id="rsvp-form" class="rsvp-form" autocomplete="on" novalidate>
+        <fieldset>
+          <legend>Will you be joining us?</legend>
 
-“What God has joined together, let no one separate.”
+          <label for="fullName">Full name *</label>
+          <input id="fullName" name="fullName" type="text" placeholder="Enter your full name" required>
 
-Matthew 19:6
+          <label for="contact">Contact number *</label>
+          <input id="contact" name="contact" type="tel" placeholder="e.g. 0912 345 6789" pattern="[0-9 \-()+]{6,}" required>
+
+          <label for="total">Total number of attendees * <span class="hint">Please include yourself in the total.</span></label>
+          <input id="total" name="total" type="number" min="1" value="1" required>
+
+          <label for="attendance">Confirmation of attendance *</label>
+          <select id="attendance" name="attendance" required>
+            <option value="">-- Please choose --</option>
+            <option value="accept">Joyfully accepts — We will celebrate with you</option>
+            <option value="decline">Regretfully declines — We will be there in spirit</option>
+          </select>
+
+          <p class="privacy">Your details will only be used for our wedding arrangements.</p>
+
+          <button type="submit" class="submit">Send My RSVP →</button>
+        </fieldset>
+      </form>
+
+      <footer class="footer">
+        <blockquote>“What God has joined together, let no one separate.”<br><cite>Matthew 19:6</cite></blockquote>
+      </footer>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
