@@ -1,1 +1,168 @@
+:root{
+  --burgundy:#4f1717;
+  --paper:#f7efe9;
+  --gold:#cfa33b;
+  --accent:#8f5f5f;
+  --max-width:1100px;
+}
 
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: "Playfair Display", serif;
+  background: linear-gradient(0deg, #2c0b0b 0%, #3f1414 100%);
+  color: var(--paper);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.35;
+}
+
+/* general container */
+.container{max-width:var(--max-width);margin:0 auto;padding:2rem}
+
+/* HERO / MAIN CARD */
+.hero{display:flex;align-items:center;justify-content:center;padding:3rem 1rem}
+.card.invitation-card{
+  width:100%;
+  max-width:720px;
+  background:linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.25)), url('images/1.jpg') no-repeat center/cover;
+  color:var(--paper);
+  padding:3.25rem;
+  position:relative;
+  overflow:hidden;
+}
+
+/* A subtle texture overlay and darken for legibility */
+.card.invitation-card .gold-frame{
+  background: rgba(79,17,17,0.85);
+  padding:2rem 2.25rem;
+  border-radius:2px;
+  position:relative;
+  box-shadow: inset 0 0 0 6px rgba(207,163,59,0.05);
+}
+
+/* Double gold border using pseudo-elements */
+.gold-frame{
+  position:relative;
+}
+.gold-frame:before,
+.gold-frame:after{
+  content:"";
+  position:absolute;
+  pointer-events:none;
+  border:3px solid var(--gold);
+  inset: 12px;
+}
+.gold-frame:after{
+  inset: 24px;
+  border-width:2px;
+  opacity:0.95;
+}
+
+/* Verse */
+.verse{
+  text-align:center;
+  font-size:0.95rem;
+  color: #f1e7df;
+  margin-bottom:1rem;
+  font-style:italic;
+}
+.verse .ref{display:block;margin-top:.6rem;font-style:normal;font-weight:600}
+
+/* Names layout */
+.names{
+  text-align:center;
+  margin: .8rem 0 1.25rem;
+}
+.names .groom,
+.names .bride{
+  display:block;
+  font-size:2.25rem;
+  letter-spacing:2px;
+  font-weight:700;
+  color:var(--paper);
+}
+.names .script{
+  display:block;
+  font-family:"Great Vibes", cursive;
+  font-size:1.25rem;
+  margin-top:.25rem;
+  color:#f3e9e5;
+}
+.names .amp{display:block;margin:0.6rem 0;font-size:1rem;letter-spacing:4px}
+
+/* When / venue */
+.when{display:flex;align-items:center;justify-content:center;gap:2rem;margin-top:1.25rem;flex-wrap:wrap}
+.date{display:flex;align-items:center;gap:.9rem;align-items:flex-end}
+.date .month{font-size:0.8rem;text-align:center;opacity:0.95}
+.date .year{display:block;font-size:.9rem}
+.date .day{
+  background:var(--paper);
+  color:var(--burgundy);
+  font-weight:700;
+  padding:0.4rem 0.7rem;
+  font-size:2rem;
+  border-radius:4px;
+  margin-bottom:3px;
+}
+.venue{font-size:0.9rem;text-align:center;opacity:0.95;padding-top:.5rem}
+
+/* DETAILS section */
+.details{display:flex;gap:1.5rem;align-items:stretch;padding:2rem 1rem}
+.left-photo img{width:100%;height:100%;max-height:520px;object-fit:cover;border-radius:3px;display:block}
+.right-invite{width:45%;min-width:320px;padding:1.25rem}
+.right-invite.slim{background:rgba(79,17,17,0.88)}
+.right-invite .gold-frame{padding:1.25rem}
+.right-invite h2{font-size:1.05rem;text-align:center;margin:0 0 0.75rem;letter-spacing:1px}
+.parents{font-size:0.92rem;text-align:center;opacity:0.95;margin-bottom:1rem}
+.names-small{font-size:1.6rem;text-align:center;margin:0.35rem 0;font-weight:700}
+.invite-text{text-align:center;font-size:0.95rem;opacity:0.95;padding:0 0.5rem}
+
+/* Sponsors */
+.sponsors{padding:2rem 1rem;background:transparent}
+.sponsors .container h2{text-align:center;margin-bottom:1rem;font-size:1.15rem}
+.sponsor-columns{display:flex;gap:2rem;justify-content:center}
+.sponsor-columns ul{list-style:none;padding:0;margin:0;color:var(--paper);max-width:380px}
+.sponsor-columns li{padding:0.25rem 0;font-size:0.95rem;color:#f3e3dd}
+
+/* Gallery */
+.gallery{padding:2rem 1rem}
+.gallery h2{text-align:left;margin-bottom:1rem}
+.grid{display:flex;gap:1rem;flex-wrap:wrap}
+.thumb{background:none;border:0;padding:0;cursor:pointer;display:inline-block;flex:1 1 calc(33% - 1rem);max-width:320px}
+.thumb img{display:block;width:100%;height:220px;object-fit:cover;border-radius:3px;box-shadow:0 6px 18px rgba(0,0,0,0.4)}
+
+/* RSVP */
+.rsvp{padding:2rem 1rem}
+.rsvp h2{margin-bottom:1rem}
+.rsvp-form{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:0.75rem;align-items:end;max-width:720px
+}
+.rsvp-form label{display:block;font-size:0.9rem;color:var(--paper)}
+.rsvp-form input{width:100%;padding:0.6rem;border-radius:4px;border:1px solid rgba(255,255,255,0.08);background:rgba(255,255,255,0.03);color:var(--paper)}
+.rsvp-form .actions{grid-column:1/-1}
+.rsvp-form button{background:var(--gold);color:var(--burgundy);border:0;padding:0.6rem 1rem;border-radius:4px;font-weight:700;cursor:pointer}
+.rsvp-message{margin-top:.6rem;color: #e7e1d8}
+
+/* Footer */
+.site-footer{padding:1.25rem 0;text-align:center;opacity:0.85;font-size:0.9rem}
+
+/* Lightbox */
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.85);display:flex;align-items:center;justify-content:center;padding:2rem;z-index:999;visibility:hidden;opacity:0;transition:opacity .18s}
+.lightbox[aria-hidden="false"]{visibility:visible;opacity:1}
+.lb-image{max-width:95%;max-height:90%;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,0.7)}
+.lb-close{position:absolute;top:18px;right:18px;background:none;border:0;color:var(--paper);font-size:2.5rem;cursor:pointer}
+
+/* Responsive */
+@media (max-width:980px){
+  .details{flex-direction:column}
+  .right-invite{width:100%;min-width:auto}
+  .card.invitation-card{padding:2rem}
+}
+@media (max-width:600px){
+  .date .day{font-size:1.6rem}
+  .card.invitation-card{padding:1.5rem}
+  .names .groom,.names .bride{font-size:1.6rem}
+  .thumb img{height:140px}
+}
