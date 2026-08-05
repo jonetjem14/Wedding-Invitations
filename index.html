@@ -56,7 +56,26 @@
     </section>
   </main>
 
-  <div id="toast" class="toast" role="status" aria-live="polite" hidden></div>
+  <div
+  id="successPopup"
+  class="popup-overlay"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="popupTitle"
+  hidden
+>
+  <div class="popup-box">
+    <div class="popup-heart" aria-hidden="true">♥</div>
+
+    <h2 id="popupTitle">Thank you!</h2>
+
+    <p>You have successfully submitted your response.</p>
+
+    <button type="button" id="closePopup" class="popup-close">
+      Close
+    </button>
+  </div>
+</div>
 
   <script src="script.js"></script>
 </body>
