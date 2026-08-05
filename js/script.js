@@ -7,7 +7,7 @@
   const closePopupButton = document.getElementById("closePopup");
 
   // We will replace this with your Google Apps Script URL later.
-  const FORMS_ENDPOINT = "PASTE_YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+  const FORMS_ENDPOINT = https://script.google.com/macros/s/AKfycbzOsg-8i62KR8ucaiEdvPfhCPHl-3e5KQ0Q4JfvtmgB8GquhuG3ZN_r8QSoXM8hJfGUMg/exec;
 
   function validate(formData) {
     const name = formData.get("fullName")?.trim();
