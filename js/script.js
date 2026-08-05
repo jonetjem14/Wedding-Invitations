@@ -1,3 +1,4 @@
+alert("New JavaScript loaded successfully!");
 // Wedding RSVP submission
 
 (() => {
