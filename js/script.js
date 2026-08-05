@@ -1,117 +1,103 @@
-const RSVP_ENDPOINT = "";
+// script.js — lightweight client-side RSVP handling
+// Notes:
+// - This script validates the form, shows an on-page toast, and stores the RSVP locally in localStorage.
+// - For production collection, replace the placeholder endpoint with a server endpoint or Formspree/Netlify Forms integration.
+// - To enable server collection, set FORMS_ENDPOINT to a valid POST URL and adjust the format.
 
-const form = document.getElementById("rsvpForm");
-const formContent = document.getElementById("formContent");
-const successMessage = document.getElementById("successMessage");
-const attendeeField = document.getElementById("attendeeField");
-const attendeesInput = document.getElementById("attendees");
+(() => {
+  const form = document.getElementById('rsvp-form');
+  const toast = document.getElementById('toast');
 
-const fields = {
-  name: document.getElementById("name"),
-  contact: document.getElementById("contact"),
-  attendees: attendeesInput
-};
+  // Set this to a real endpoint if you want form submissions sent to a server.
+  // Example: 'https://formspree.io/f/your-id' (Formspree) or your webhook URL.
+  const FORMS_ENDPOINT = '';
 
-function showError(fieldName, message) {
-  const field = fields[fieldName];
-  const error = document.getElementById(`${fieldName}Error`);
-  if (field) field.classList.toggle("invalid", Boolean(message));
-  if (error) error.textContent = message;
-}
-
-function validateForm() {
-  let valid = true;
-  const name = fields.name.value.trim();
-  const contact = fields.contact.value.trim();
-  const attendance = form.querySelector('input[name="attendance"]:checked');
-
-  showError("name", "");
-  showError("contact", "");
-  showError("attendees", "");
-  document.getElementById("attendanceError").textContent = "";
-
-  if (name.length < 2) {
-    showError("name", "Please enter your full name.");
-    valid = false;
+  function showToast(message, timeout = 4000) {
+    toast.textContent = message;
+    toast.hidden = false;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(() => {
+      toast.hidden = true;
+    }, timeout);
   }
 
-  if (!/^[+\d][\d\s()-]{7,19}$/.test(contact)) {
-    showError("contact", "Please enter a valid contact number.");
-    valid = false;
+  function validate(formData) {
+    const name = formData.get('fullName')?.trim();
+    const contact = formData.get('contact')?.trim();
+    const total = Number(formData.get('total'));
+    const attendance = formData.get('attendance');
+
+    if (!name) return 'Please enter your full name.';
+    if (!contact) return 'Please enter a contact number.';
+    if (!total || total < 1) return 'Please indicate the total number of attendees (minimum 1).';
+    if (!attendance) return 'Please choose whether you will attend.';
+    return '';
   }
 
-  if (!attendance) {
-    document.getElementById("attendanceError").textContent = "Please confirm whether you can attend.";
-    valid = false;
-  }
-
-  if (attendance?.value === "Attending") {
-    const total = Number(fields.attendees.value);
-    if (!Number.isInteger(total) || total < 1 || total > 10) {
-      showError("attendees", "Please enter a number from 1 to 10.");
-      valid = false;
+  function saveLocally(submission) {
+    try {
+      const key = 'wedding_rsvps';
+      const existing = JSON.parse(localStorage.getItem(key) || '[]');
+      existing.push({ ...submission, createdAt: new Date().toISOString() });
+      localStorage.setItem(key, JSON.stringify(existing));
+    } catch (e) {
+      // ignore localStorage errors
+      console.warn('Could not save RSVP locally', e);
     }
   }
 
-  return valid;
-}
-
-form.addEventListener("change", (event) => {
-  if (event.target.name === "attendance") {
-    const attending = event.target.value === "Attending";
-    attendeeField.hidden = !attending;
-    attendeesInput.required = attending;
-    if (!attending) attendeesInput.value = "0";
-    if (attending && Number(attendeesInput.value) < 1) attendeesInput.value = "1";
+  async function sendToEndpoint(endpoint, submission) {
+    const resp = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(submission)
+    });
+    return resp;
   }
-});
 
-form.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  if (!validateForm()) return;
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    const fd = new FormData(form);
+    const error = validate(fd);
+    if (error) {
+      showToast(error);
+      return;
+    }
 
-  const submitButton = form.querySelector("button[type='submit']");
-  const attendance = form.querySelector('input[name="attendance"]:checked').value;
-  const response = {
-    name: fields.name.value.trim(),
-    contact: fields.contact.value.trim(),
-    attendees: attendance === "Attending" ? Number(fields.attendees.value) : 0,
-    attendance,
-    submittedAt: new Date().toISOString()
-  };
+    const submission = {
+      fullName: fd.get('fullName').trim(),
+      contact: fd.get('contact').trim(),
+      total: Number(fd.get('total')),
+      attendance: fd.get('attendance'),
+      respondedAt: new Date().toISOString()
+    };
 
-  submitButton.disabled = true;
-  submitButton.firstElementChild.textContent = "Sending...";
+    // Save locally (useful when there's no server)
+    saveLocally(submission);
 
-  try {
-    if (RSVP_ENDPOINT) {
-      await fetch(RSVP_ENDPOINT, {
-        method: "POST",
-        mode: "no-cors",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(response)
-      });
+    // If an endpoint is configured, attempt to POST
+    if (FORMS_ENDPOINT) {
+      try {
+        const res = await sendToEndpoint(FORMS_ENDPOINT, submission);
+        if (!res.ok) {
+          showToast('Submission saved locally. Server responded with an error.');
+          console.error('Server response', res.status, await res.text());
+        } else {
+          showToast('Thank you — your RSVP was sent.');
+          form.reset();
+        }
+      } catch (err) {
+        showToast('Submission saved locally (network error).');
+        console.error('Network error', err);
+      }
     } else {
-      localStorage.setItem("joseFyneeRsvp", JSON.stringify(response));
+      showToast('Thank you — your RSVP was saved locally.');
+      form.reset();
     }
 
-    document.getElementById("guestName").textContent = response.name.split(" ")[0];
-    document.getElementById("successText").textContent = attendance === "Attending"
-      ? `We are delighted to celebrate with you and your party of ${response.attendees}. See you on our special day!`
-      : "We understand and appreciate you letting us know. You will be in our hearts on our special day.";
-    formContent.hidden = true;
-    successMessage.hidden = false;
-    successMessage.scrollIntoView({ behavior: "smooth", block: "center" });
-  } catch (error) {
-    alert("We could not send your RSVP. Please check your connection and try again.");
-  } finally {
-    submitButton.disabled = false;
-    submitButton.firstElementChild.textContent = "Send My RSVP";
-  }
-});
-
-document.getElementById("editResponse").addEventListener("click", () => {
-  successMessage.hidden = true;
-  formContent.hidden = false;
-  form.scrollIntoView({ behavior: "smooth", block: "start" });
-});
+    // Also log to console so you can paste results manually later (if needed)
+    console.log('RSVP submission:', submission);
+  });
+})();
