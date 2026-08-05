@@ -1,9 +1,9 @@
 /* Styles for Wedding Reservation */
 :root{
-  --bg:#fff8f6;
+  --bg:#fff5f6; /* soft ivory/pale pink background */
   --card:#fff;
-  --accent:#c94f7c;
-  --muted:#6b6b6b;
+  --accent:#7B1128; /* burgundy */
+  --muted:#6e4b4b; /* muted burgundy/charcoal */
   --max-width:760px;
 }
 *{box-sizing:border-box}
