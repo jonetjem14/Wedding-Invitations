@@ -124,3 +124,16 @@ blockquote{margin:0;font-style:italic}
   body{padding:72px}
   .card{padding:48px}
 }
+.couple-photo {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.couple-photo img {
+    width: 220px;
+    max-width: 90%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+}
