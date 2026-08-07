@@ -156,4 +156,26 @@ blockquote{margin:0;font-style:italic}
 .gallery-overlay {
   display: none;
   }
+/* Small couple photo above names */
+.couple-photo {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 15px;
+}
+
+.couple-photo img {
+  width: 100%;
+  max-width: 280px;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* Make it slightly smaller on phones */
+@media (max-width: 600px) {
+  .couple-photo img {
+    max-width: 220px;
+  }
 }
