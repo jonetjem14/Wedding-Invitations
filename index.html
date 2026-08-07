@@ -22,43 +22,110 @@
       <div class="heart" aria-hidden="true">♥</div>
 </div>
 
-      <p class="note">
-      As we celebrate one of the most special days of our lives, we’re keeping our wedding intimate and surrounded by the people closest to our hearts. 
-        Because seating is limited, we kindly ask that you reach out to us or our wedding coordinator first if you’re hoping to bring an additional guest. 
-        We’ll be more than happy to accommodate requests whenever space allows. Thank you so much for understanding and for helping us keep our celebration warm, meaningful, and close to our hearts. 
-        We can’t wait to celebrate with you!</p>
+<p class="note">
+  As we celebrate one of the most special days of our lives, we’re keeping our wedding intimate and surrounded by the people closest to our hearts.
+  Because seating is limited, we kindly ask that you reach out to us or our wedding coordinator first if you’re hoping to bring an additional guest.
+  We’ll be more than happy to accommodate requests whenever space allows.
+  Thank you so much for understanding and for helping us keep our celebration warm, meaningful, and close to our hearts.
+  We can’t wait to celebrate with you! ♥
+</p>
 
-      <p class="rsvp-by">Kindly respond by <strong>August 22, 2026</strong></p>
+<p class="rsvp-by">
+  Kindly RSVP by <strong>August 22, 2026</strong>
+</p>
 
-      <form id="rsvp-form" class="rsvp-form" autocomplete="on" novalidate>
-        <fieldset>
-          <legend>Will you be joining us?</legend>
+<form id="rsvp-form" class="rsvp-form" autocomplete="on" novalidate>
+  <fieldset>
 
-          <label for="fullName">Full name *</label>
-          <input id="fullName" name="fullName" type="text" placeholder="Enter your full name" required>
+    <label for="fullName">Full Name *</label>
+    <input
+      id="fullName"
+      name="fullName"
+      type="text"
+      placeholder="Enter your full name"
+      required
+    >
 
-          <label for="contact">Contact number *</label>
-          <input id="contact" name="contact" type="tel" placeholder="e.g. 0912 345 6789" pattern="[0-9 \-()+]{6,}" required>
+    <label for="contact">Contact Number *</label>
+    <input
+      id="contact"
+      name="contact"
+      type="tel"
+      placeholder="e.g. 0912 345 6789"
+      pattern="[0-9 \-()+]{6,}"
+      required
+    >
 
-          <label for="total">Total number of attendees * <span class="hint">Please include yourself in the total.</span></label>
-          <input id="total" name="total" type="number" min="1" value="1" required>
+    <label for="attendance">Will you be joining us? *</label>
+    <select id="attendance" name="attendance" required>
+      <option value="">-- Please choose --</option>
+      <option value="accept">💕 Yes, I’ll be there!</option>
+      <option value="decline">Sadly, I won’t be able to attend</option>
+    </select>
 
-          <label for="attendance">Confirmation of attendance *</label>
-          <select id="attendance" name="attendance" required>
-            <option value="">-- Please choose --</option>
-            <option value="accept">Joyfully accepts — We will celebrate with you</option>
-            <option value="decline">Regretfully declines — We will be there in spirit</option>
-          </select>
+    <!-- These questions only appear when attending -->
+    <div id="guestDetails" hidden>
 
-          <p class="privacy">Your details will only be used for our wedding arrangements.</p>
+      <label for="total">
+        Total Number of Attendees *
+        <span class="hint">Please include yourself in the total.</span>
+      </label>
 
-          <button type="submit" class="submit">Send My RSVP →</button>
-        </fieldset>
-      </form>
+      <select id="total" name="total">
+        <option value="1">1 Guest</option>
+        <option value="2">2 Guests</option>
+        <option value="3">3 Guests</option>
+        <option value="4">4 Guests</option>
+        <option value="5+">5+ Guests — Please contact us first</option>
+      </select>
 
-      <footer class="footer">
-        <blockquote>“What God has joined together, let no one separate.”<br><cite>Matthew 19:6</cite></blockquote>
-      </footer>
+      <div id="additionalGuestsWrapper" hidden>
+        <label for="guestNames">
+          Name(s) of Additional Guest(s) *
+          <span class="hint">
+            Please enter the full names of everyone attending with you.
+          </span>
+        </label>
+
+        <textarea
+          id="guestNames"
+          name="guestNames"
+          rows="3"
+          placeholder="Example: Juan Dela Cruz, Maria Dela Cruz"
+        ></textarea>
+      </div>
+
+    </div>
+
+    <label for="message">
+      Message for the Couple
+      <span class="hint">Optional — leave us a message, prayer, or well wishes. ♥</span>
+    </label>
+
+    <textarea
+      id="message"
+      name="message"
+      rows="4"
+      placeholder="Write your message here..."
+    ></textarea>
+
+    <p class="privacy">
+      Your details will only be used for our wedding arrangements.
+    </p>
+
+    <button type="submit" class="submit">
+      Send My RSVP →
+    </button>
+
+  </fieldset>
+</form>
+
+<footer class="footer">
+  <blockquote>
+    “What God has joined together, let no one separate.”<br>
+    <cite>Matthew 19:6</cite>
+  </blockquote>
+</footer>
     </section>
   </main>
 
@@ -73,13 +140,15 @@
   <div class="popup-box">
     <div class="popup-heart" aria-hidden="true">♥</div>
 
-    <h2 id="popupTitle">Thank you!</h2>
+  <h2 id="popupTitle">Thank you!</h2>
 
-    <p>You have successfully submitted your response.</p>
+  <p id="popupMessage">
+    Your RSVP has been successfully submitted.
+  </p>
 
-    <button type="button" id="closePopup" class="popup-close">
-      Close
-    </button>
+<button type="button" id="closePopup" class="popup-close">
+  Close
+</button>
   </div>
 </div>
 
