@@ -38,7 +38,28 @@ body{
 fieldset{border:0;padding:0;margin:0}
 legend{font-weight:700;margin-bottom:8px}
 label{display:block;margin-top:12px;font-size:14px}
-input[type=text],input[type=tel],input[type=number],select{width:100%;padding:10px;border-radius:6px;border:1px solid #ececec;margin-top:6px;font-size:15px}
+input[type=text],
+input[type=tel],
+input[type=number],
+select,
+textarea {
+  width: 100%;
+  padding: 11px 12px;
+  border-radius: 6px;
+  border: 1px solid #dddddd;
+  margin-top: 6px;
+  font-size: 15px;
+  font-family: inherit;
+  background: #ffffff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(123, 17, 40, 0.08);
+}
 .hint{display:block;font-size:12px;color:var(--muted)}
 .privacy{font-size:13px;color:var(--muted);margin:12px 0}
 .submit{background:var(--accent);color:#fff;padding:12px 16px;border:0;border-radius:8px;font-weight:700;cursor:pointer;width:100%}
@@ -150,6 +171,7 @@ blockquote{margin:0;font-style:italic}
     width: 95%;
     max-width: 350px;
   }
+}
 @media (max-width: 600px) {
   body {
     padding: 20px 12px 40px;
