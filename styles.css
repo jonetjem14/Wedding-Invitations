@@ -10,13 +10,16 @@
 html,body{height:100%}
 body{
   margin:0;
+  min-height:100vh;
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background:linear-gradient(180deg,var(--bg),#fff);
   color:#222;
+
   display:flex;
-  align-items:center;
   justify-content:center;
-  padding:48px 16px;
+  align-items:flex-start;
+
+  padding:30px 16px 48px;
 }
 .page{width:100%;max-width:var(--max-width)}
 .card{
@@ -124,38 +127,6 @@ blockquote{margin:0;font-style:italic}
   body{padding:72px}
   .card{padding:48px}
 }
-.couple-photo {
-    text-align: center;
-    margin: 20px 0;
-}
-/* Single wedding photo */
-.gallery-grid {
-  display: flex;
-  justify-content: center;
-  margin: 20px 0;
-}
-
-.gallery-item {
-  position: relative;
-  width: 100%;
-  max-width: 180px; /* Change this number to resize the photo */
-  margin: 0 auto;
-  overflow: hidden;
-  border-radius: 12px;
-}
-
-.gallery-item img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-}
-
-/* Hide the plus overlay if you do not need it */
-.gallery-overlay {
-  display: none;
-  }
 /* Small couple photo above names */
 .couple-photo {
   width: 100%;
@@ -177,5 +148,17 @@ blockquote{margin:0;font-style:italic}
 @media (max-width: 600px) {
   .couple-photo img {
     max-width: 220px;
+  }
+  @media (max-width: 600px) {
+  body {
+    padding: 20px 12px 40px;
+  }
+
+  .card {
+    padding: 24px 20px;
+  }
+
+  .title {
+    font-size: 30px;
   }
 }
