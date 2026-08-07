@@ -136,8 +136,9 @@ blockquote{margin:0;font-style:italic}
 .couple-photo img {
   display: block;
   width: 100%;
-  max-width: 280px;
+  max-width: 420px;
   height: auto;
+  display: block;
   border-radius: 12px;
   object-fit: cover;
   box-shadow: 0 8px 20px rgba(0,0,0,.12);
@@ -146,7 +147,8 @@ blockquote{margin:0;font-style:italic}
 /* Make it slightly smaller on phones */
 @media (max-width: 600px) {
   .couple-photo img {
-    max-width: 220px;
+    width: 95%;
+    max-width: 350px;
   }
 @media (max-width: 600px) {
   body {
@@ -158,7 +160,7 @@ blockquote{margin:0;font-style:italic}
   }
 
   .couple-photo {
-    margin-top: 25px;
+    margin: 25px 0 18px;
   }
 
   .couple-photo img {
