@@ -14,11 +14,9 @@ body{
   font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
   background:linear-gradient(180deg,var(--bg),#fff);
   color:#222;
-
   display:flex;
   justify-content:center;
   align-items:flex-start;
-
   padding:30px 16px 48px;
 }
 .page{width:100%;max-width:var(--max-width)}
@@ -132,16 +130,17 @@ blockquote{margin:0;font-style:italic}
   width: 100%;
   display: flex;
   justify-content: center;
-  margin: 20px 0 15px;
+  margin: 30px 0 18px;
 }
 
 .couple-photo img {
+  display: block;
   width: 100%;
   max-width: 280px;
   height: auto;
-  display: block;
   border-radius: 12px;
   object-fit: cover;
+  box-shadow: 0 8px 20px rgba(0,0,0,.12);
 }
 
 /* Make it slightly smaller on phones */
@@ -149,13 +148,21 @@ blockquote{margin:0;font-style:italic}
   .couple-photo img {
     max-width: 220px;
   }
-  @media (max-width: 600px) {
+@media (max-width: 600px) {
   body {
     padding: 20px 12px 40px;
   }
 
   .card {
     padding: 24px 20px;
+  }
+
+  .couple-photo {
+    margin-top: 25px;
+  }
+
+  .couple-photo img {
+    max-width: 220px;
   }
 
   .title {
